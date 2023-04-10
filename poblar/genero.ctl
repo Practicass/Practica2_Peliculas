@@ -1,0 +1,8 @@
+OPTIONS (SKIP = 1)
+LOAD DATA
+INFILE '../data/genero.csv'
+INTO TABLE DIVISIONES
+FIELDS TERMINATED BY ';'
+( 
+    obraGen 
+)

@@ -1,0 +1,9 @@
+OPTIONS (SKIP = 1)
+LOAD DATA
+INFILE '../data/staff.csv'
+INTO TABLE DIVISIONES
+FIELDS TERMINATED BY ';'
+( 
+    funcion
+ 
+)

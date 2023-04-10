@@ -1,0 +1,8 @@
+OPTIONS (SKIP = 1)
+LOAD DATA
+INFILE '../data/actores.csv'
+INTO TABLE DIVISIONES
+FIELDS TERMINATED BY ';'
+( 
+    personaje 
+)
