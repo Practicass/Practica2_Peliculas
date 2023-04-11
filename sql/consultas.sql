@@ -14,7 +14,7 @@ SELECT PERS.Nombre
 FROM PERSONAS PERS, DIRECTORES D
 WHERE PERS.IdPer = D.IdPer and 6 <=    (SELECT count(*)
                                         FROM OBRAS O, 
-                                        WHERE O.IdObra = D.IdObra and O.AgnoEstreno>="1990" and O.AñoDeEstreno<"2000"and EXISTS   (SELECT S.IdObra
+                                        WHERE O.IdObra = D.IdObra and O.AgnoEstreno>="1990" and O.AgnoEstreno<"2000"and EXISTS   (SELECT S.IdObra
                                                                                                                                     FROM SERIES S
                                                                                                                                     WHERE S.IdObra = O.IdObra)
                                         )
