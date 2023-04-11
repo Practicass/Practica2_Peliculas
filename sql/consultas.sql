@@ -8,6 +8,7 @@ WHERE O.IdObra = G.IdObra and G.Genero = "familiar" and EXISTS (SELECT P.IdObra
                         FROM PERSONAS PERS, ACTORES A
                         WHERE PERS.IdPer = A.IdPer and A.IdObra = O.IdObra and PERS.Sexo = "hombre")
 
+RESPUESTA DE CLASE=1
 
 Listar el nombre de los directores que han dirigido al menos seis series distintas en la década de los 90:
 SELECT PERS.Nombre
@@ -19,7 +20,7 @@ WHERE PERS.IdPer = D.IdPer and 6 <=    (SELECT count(*)
                                                                                                                                     WHERE S.IdObra = O.IdObra)
                                         )
 
-
+RESPUESTA DE CLASE=4
 
 
 Obtener el número de personajes distintos que han sido interpretados por al menos cuatro actores o actrices
