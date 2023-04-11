@@ -5,5 +5,6 @@ INTO TABLE SERIES
 FIELDS TERMINATED BY ';'
 ( 
     inicio,
-    fin 
+    fin,
+    IdObra
 )

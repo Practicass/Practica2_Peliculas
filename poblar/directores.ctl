@@ -4,5 +4,6 @@ INFILE '../data/directores.csv'
 INTO TABLE DIRECTORES
 FIELDS TERMINATED BY ';'
 ( 
-    denominacion 
+    IdPer,
+    IdObra 
 )

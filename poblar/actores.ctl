@@ -4,5 +4,7 @@ INFILE '../data/actores.csv'
 INTO TABLE ACTORES
 FIELDS TERMINATED BY ';'
 ( 
-    personaje 
+     personaje,
+     IdPer,
+     IdObra
 )

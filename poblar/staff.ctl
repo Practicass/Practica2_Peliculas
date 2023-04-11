@@ -5,5 +5,6 @@ INTO TABLE STAFF
 FIELDS TERMINATED BY ';'
 ( 
     funcion
- 
+    IdPer,
+    IdObra
 )

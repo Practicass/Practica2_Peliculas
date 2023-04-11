@@ -5,5 +5,6 @@ INTO TABLE OBRAS
 FIELDS TERMINATED BY ';'
 ( 
     titulo,
-    AgnoEstreno 
+    AgnoEstreno,
+    idObr
 )

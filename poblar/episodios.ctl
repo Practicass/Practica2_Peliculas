@@ -4,6 +4,8 @@ INFILE '../data/episodios.csv'
 INTO TABLE EPISODIOS
 FIELDS TERMINATED BY ';'
 ( 
+    Serie,
     temp, 
-    num 
+    num,
+    IdObra
 )
