@@ -77,4 +77,3 @@ WHERE P.IdObra=(SELECT P1.IdObra
                                   and EXISTS (SELECT IdObra
                                               FROM PELICULAS P3
                                               WHERE P3.IdObra=P1.IdObra and P3.Tipo="followed by"))
-
