@@ -1,24 +1,31 @@
 -- Listar el título de las películas de género familiar que sólo han sido interpretadas por actrices:
 SELECT O.Titulo
 FROM OBRAS O, GENERO G
-WHERE O.IdObra = G.IdObra and G.Genero = "familiar" and EXISTS (SELECT P.IdObra
-                                                                FROM PELICULAS P
-                                                                WHERE P.IdObra = O.IdObra)
+WHERE   O.IdObra = G.IdObra 
+        and G.Genero = 'family' 
+        and EXISTS (SELECT P.IdObra
+                    FROM PELICULAS P
+                    WHERE P.IdObra = O.IdObra)
         and NOT EXISTS (SELECT PERS.IdPer
                         FROM PERSONAS PERS, ACTORES A
-                        WHERE PERS.IdPer = A.IdPer and A.IdObra = O.IdObra and PERS.Sexo = "hombre")
+                        WHERE   PERS.IdPer = A.IdPer 
+                                and A.IdObra = O.IdObra 
+                                and PERS.Sexo = 'h');
 
 -- RESPUESTA DE CLASE=1
 
 -- Listar el nombre de los directores que han dirigido al menos seis series distintas en la década de los 90:
 SELECT PERS.Nombre
 FROM PERSONAS PERS, DIRECTORES D
-WHERE PERS.IdPer = D.IdPer and 6 <=    (SELECT count(*)
-                                        FROM OBRAS O, 
-                                        WHERE O.IdObra = D.IdObra and O.AgnoEstreno>="1990" and O.AgnoEstreno<"2000"and EXISTS   (SELECT S.IdObra
-                                                                                                                                    FROM SERIES S
-                                                                                                                                    WHERE S.IdObra = O.IdObra)
-                                        )
+WHERE PERS.IdPer = D.IdPer and 6 <= (SELECT count(*)
+                                    FROM OBRAS O, 
+                                    WHERE   O.IdObra = D.IdObra 
+                                            and O.AgnoEstreno >= 990 
+                                            and O.AgnoEstreno < 2000 
+                                            and EXISTS      (SELECT S.IdObra
+                                                            FROM SERIES S
+                                                            WHERE S.IdObra = O.IdObra)
+                                        );
 
 -- RESPUESTA DE CLASE=4
 
