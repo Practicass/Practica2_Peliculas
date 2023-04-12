@@ -50,7 +50,7 @@ CREATE TABLE SERIES (
     inicio NUMBER(4),
     fin NUMBER(4),
     FOREIGN KEY(IdObra) REFERENCES OBRAS(IdObra) ON DELETE CASCADE,
-    CHECK (inicio < fin)
+    CHECK (inicio <= fin)
 );
 
 CREATE TABLE EPISODIOS (
