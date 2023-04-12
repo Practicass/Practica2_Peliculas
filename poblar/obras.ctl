@@ -6,5 +6,5 @@ FIELDS TERMINATED BY ';'
 ( 
     titulo,
     AgnoEstreno,
-    idObr
+    idObra
 )
