@@ -6,5 +6,6 @@ FIELDS TERMINATED BY ';'
 ( 
      personaje,
      IdPer,
-     IdObra
+     IdObra,
+     idPapel
 )
