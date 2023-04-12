@@ -1,4 +1,4 @@
-Listar el título de las películas de género familiar que sólo han sido interpretadas por actrices:
+-- Listar el título de las películas de género familiar que sólo han sido interpretadas por actrices:
 SELECT O.Titulo
 FROM OBRAS O, GENERO G
 WHERE O.IdObra = G.IdObra and G.Genero = "familiar" and EXISTS (SELECT P.IdObra
@@ -8,9 +8,9 @@ WHERE O.IdObra = G.IdObra and G.Genero = "familiar" and EXISTS (SELECT P.IdObra
                         FROM PERSONAS PERS, ACTORES A
                         WHERE PERS.IdPer = A.IdPer and A.IdObra = O.IdObra and PERS.Sexo = "hombre")
 
-RESPUESTA DE CLASE=1
+-- RESPUESTA DE CLASE=1
 
-Listar el nombre de los directores que han dirigido al menos seis series distintas en la década de los 90:
+-- Listar el nombre de los directores que han dirigido al menos seis series distintas en la década de los 90:
 SELECT PERS.Nombre
 FROM PERSONAS PERS, DIRECTORES D
 WHERE PERS.IdPer = D.IdPer and 6 <=    (SELECT count(*)
@@ -20,11 +20,11 @@ WHERE PERS.IdPer = D.IdPer and 6 <=    (SELECT count(*)
                                                                                                                                     WHERE S.IdObra = O.IdObra)
                                         )
 
-RESPUESTA DE CLASE=4
+-- RESPUESTA DE CLASE=4
 
 
-Obtener el número de personajes distintos que han sido interpretados por al menos cuatro actores o actrices
-distintos y que aparecen en películas de alguna saga (es decir, que son secuelas/precuelas unas de otras)
+-- Obtener el número de personajes distintos que han sido interpretados por al menos cuatro actores o actrices
+-- distintos y que aparecen en películas de alguna saga (es decir, que son secuelas/precuelas unas de otras)
 
 SELECT count(*)
 FROM ACTORES A
@@ -41,10 +41,10 @@ WHERE 4 <= (SELECT count(DISTINCT A.IdPer)
                                                                                                                     FROM PELICULAS P3
                                                                                                                     WHERE P3.IdObra=P1.IdObra and P3.Tipo="followed by"))))
 
-//LO DE ABAJO SON PRUEBAS
+--LO DE ABAJO SON PRUEBAS
 
 
-//LA PRIMERA PELI DE CADA SAGA
+--LA PRIMERA PELI DE CADA SAGA
 SELECT P.IdObra
 FROM PELICULAS P
 WHERE NOT EXISTS (SELECT P2.IdObra
@@ -63,7 +63,7 @@ WHERE NOT EXISTS (SELECT IdObra
                   and EXISTS (SELECT IdObra
                               FROM PELICULAS P3
                               WHERE P3.IdObra=P.IdObra and P2.Tipo="followed by")
-//GROUP BY P.IdObra
+--GROUP BY P.IdObra
 
 
 SELECT UNIQUE P.IdObra, P.IdObra2
