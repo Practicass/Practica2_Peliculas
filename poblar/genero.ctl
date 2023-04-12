@@ -4,6 +4,6 @@ INFILE '../data/genero.csv'
 INTO TABLE GENERO
 FIELDS TERMINATED BY ';'
 ( 
-    obraGen,
+    Genero,
     IdObra
 )
