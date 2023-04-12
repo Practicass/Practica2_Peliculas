@@ -4,7 +4,7 @@ INFILE '../data/staff.csv'
 INTO TABLE STAFF
 FIELDS TERMINATED BY ';'
 ( 
-    funcion
+    funcion,
     IdPer,
     IdObra
 )
