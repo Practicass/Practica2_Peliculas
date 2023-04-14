@@ -1,6 +1,6 @@
 OPTIONS (SKIP = 1)
 LOAD DATA
-INFILE '../data/remakes.csv'
+INFILE '../data/conexion.csv'
 INTO TABLE CONEXION
 FIELDS TERMINATED BY ';'
 ( 
