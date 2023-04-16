@@ -52,26 +52,14 @@ SELECT PERS2.Nombre, count(S2.IdObra) as num_veces
 
 
 
-
-SELECT UNIQUE A.personaje, count (UNIQUE A.idPer)
-            FROM ACTORES A, ACTORES A2
-            WHERE A.personaje = A2.personaje and (SELECT P1.IdObra --Primera pelicula de una saga
-                                                                                      FROM CONEXION P1
-                                                                                      WHERE     A.IdObra = P1.IdObra2 
-                                                                                                and NOT EXISTS (SELECT IdObra
-                                                                                                                FROM CONEXION P2   
-                                                                                                                WHERE P2.IdObra2=P1.IdObra and P2.Tipo='followed by')
-                                                                                                and EXISTS (SELECT IdObra
-                                                                                                                FROM CONEXION P3
-                                                                                                                WHERE P3.IdObra=P1.IdObra and P3.Tipo='followed by')) = (SELECT P1.IdObra --Primera pelicula de una saga
-                                                                                      FROM CONEXION P1
-                                                                                      WHERE     A2.IdObra = P1.IdObra2 
-                                                                                                and NOT EXISTS (SELECT IdObra
-                                                                                                                FROM CONEXION P2   
-                                                                                                                WHERE P2.IdObra2=P1.IdObra and P2.Tipo='followed by')
-                                                                                                and EXISTS (SELECT IdObra
-                                                                                                                FROM CONEXION P3
-                                                                                                                WHERE P3.IdObra=P1.IdObra and P3.Tipo='followed by'))
-GROUP BY A.personaje
-HAVING COUNT (UNIQUE A.IdPer) >= 4;
-    
+SELECT A.Personaje, COUNT(A.Personaje) AS NumeroPersonajes
+FROM ACTORES A
+WHERE A.idObra IN (
+    SELECT DISTINCT c1.idObra
+    FROM CONEXION c1, CONEXION c2
+    WHERE c1.idObra = c2.idObra2 
+                  AND  c1.Tipo IN ('follows', 'followed by')
+     AND c2.Tipo IN ('follows', 'followed by') 
+)  AND A.Personaje IS NOT NULL
+GROUP BY A.Personaje
+HAVING COUNT(DISTINCT A.IdPer) >= 4;

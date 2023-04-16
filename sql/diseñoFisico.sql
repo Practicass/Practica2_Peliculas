@@ -42,5 +42,25 @@ WHERE   O.IdObra = pF.IdObra
 
 ----------------SEGUNDA CONSULTA----------------
 ------------------------------------------------
-CREATE UNIQUE INDEX fin_idx on SERIES(fin,IdObra);
-CREATE UNIQUE INDEX fecha_idx on OBRAS(AgnoEstreno,IdObra);
+CREATE UNIQUE  INDEX fin_idx on SERIES(fin,IdObra);
+CREATE UNIQUE  INDEX fecha_idx on OBRAS(AgnoEstreno,IdObra);
+
+
+
+
+----------------TERCERA CONSULTA----------------
+------------------------------------------------
+
+CREATE MATERIALIZED VIEW  ConexPeli AS
+SELECT DISTINCT c1.idObra
+ FROM CONEXION c1, CONEXION c2
+ WHERE c1.idObra = c2.idObra2 
+                AND  c1.Tipo IN ('follows', 'followed by')
+    AND c2.Tipo IN ('follows', 'followed by');
+
+SELECT A.Personaje, COUNT(A.Personaje) AS NumeroPersonajes
+FROM ACTORES A, ConexPeli C
+WHERE A.IdObra = C.IdObra AND A.Personaje IS NOT NULL
+GROUP BY A.Personaje
+HAVING COUNT(DISTINCT A.IdPer) >= 4;
+
