@@ -100,6 +100,28 @@ WHERE 4 <= (SELECT count(  A.IdPer)
                                                                                                                 WHERE P3.IdObra=P1.IdObra and P3.Tipo='followed by')));
 
 
+SELECT UNIQUE A.personaje, count (UNIQUE A.idPer)
+            FROM ACTORES A, ACTORES A2
+            WHERE A.personaje = A2.personaje and (SELECT P1.IdObra --Primera pelicula de una saga
+                                                                                      FROM CONEXION P1
+                                                                                      WHERE     A.IdObra = P1.IdObra2 
+                                                                                                and NOT EXISTS (SELECT IdObra
+                                                                                                                FROM CONEXION P2   
+                                                                                                                WHERE P2.IdObra2=P1.IdObra and P2.Tipo='followed by')
+                                                                                                and EXISTS (SELECT IdObra
+                                                                                                                FROM CONEXION P3
+                                                                                                                WHERE P3.IdObra=P1.IdObra and P3.Tipo='followed by')) = (SELECT P1.IdObra --Primera pelicula de una saga
+                                                                                      FROM CONEXION P1
+                                                                                      WHERE     A2.IdObra = P1.IdObra2 
+                                                                                                and NOT EXISTS (SELECT IdObra
+                                                                                                                FROM CONEXION P2   
+                                                                                                                WHERE P2.IdObra2=P1.IdObra and P2.Tipo='followed by')
+                                                                                                and EXISTS (SELECT IdObra
+                                                                                                                FROM CONEXION P3
+                                                                                                                WHERE P3.IdObra=P1.IdObra and P3.Tipo='followed by'))
+GROUP BY A.personaje
+HAVING COUNT (UNIQUE A.IdPer) >= 4;
+
 (actor)
 
 (peli1, peli2, followed by)
