@@ -16,7 +16,7 @@ WHERE   O.IdObra = G.IdObra
 --Listar el nombre de los directores que han dirigido al menos seis series distintas en la década de los 90.
 
 SELECT PERS.Nombre AS nomPer, COUNT(S.IdObra) AS contador
-FROM OBRAS O, SERIES S, DIRECTORES D, EPSIODIOS E
+FROM OBRAS O, SERIES S, DIRECTORES D
 JOIN PERSONAS PERS ON PERS.IdPer = D.IdPer
 WHERE ((O.AgnoEstreno < 1990
     AND (S.fin IS NULL OR S.fin >= 1990)) OR (O.AgnoEstreno>=1990 and O.Agnoestreno < 2000))
