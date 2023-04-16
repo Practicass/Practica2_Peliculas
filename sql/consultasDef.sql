@@ -1,11 +1,9 @@
 -- Listar el título de las películas de género familiar que sólo han sido interpretadas por actrices:
 SELECT O.Titulo
-FROM OBRAS O, GENERO G
+FROM OBRAS O, GENERO G, PELICULAS P
 WHERE   O.IdObra = G.IdObra 
         and G.Genero = 'family' 
-        and EXISTS (SELECT P.IdObra
-                    FROM PELICULAS P
-                    WHERE P.IdObra = O.IdObra)
+        and P.IdObra = O.IdObra
         and NOT EXISTS (SELECT PERS.IdPer
                         FROM PERSONAS PERS, ACTORES A
                         WHERE   PERS.IdPer = A.IdPer 
