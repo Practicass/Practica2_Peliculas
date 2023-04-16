@@ -38,3 +38,15 @@ WHERE ((O.AgnoEstreno < 1990
 GROUP BY PERS.Nombre
 HAVING COUNT(DISTINCT O.IdObra) >= 6
 ORDER BY contador DESC;
+
+
+SELECT PERS2.Nombre, count(S2.IdObra)
+        FROM PERSONAS PERS2, DIRECTORES D2, OBRAS O2, SERIES S2
+        WHERE ((O2.AgnoEstreno < 1990
+    AND (S2.fin >= 1990)) OR (O2.AgnoEstreno>=1990 and O2.Agnoestreno < 2000))
+        and D2.IdPer = PERS2.IdPer
+        and O2.IdObra = D2.IdObra
+        and O2.IdObra = S2.IdObra
+        GROUP BY PERS2.Nombre
+        HAVING COUNT(DISTINCT O2.IdObra) >= 6
+    
