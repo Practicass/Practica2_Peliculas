@@ -38,7 +38,7 @@ HAVING COUNT(DISTINCT O.IdObra) >= 6
 ORDER BY contador DESC;
 
 
-SELECT PERS2.Nombre, count(S2.IdObra)
+SELECT PERS2.Nombre, count(S2.IdObra) as num_veces
         FROM PERSONAS PERS2, DIRECTORES D2, OBRAS O2, SERIES S2
         WHERE ((O2.AgnoEstreno < 1990
     AND (S2.fin >= 1990)) OR (O2.AgnoEstreno>=1990 and O2.Agnoestreno < 2000))
