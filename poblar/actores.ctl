@@ -12,4 +12,3 @@ TRAILING NULLCOLS
      idPapel "sec.nextval"
 )
 
-select role_name , IDper from actores where idPapel = 1;
