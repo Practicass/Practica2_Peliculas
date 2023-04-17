@@ -1,6 +1,32 @@
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 
+/***No dejar borrar peliculas (Habría que borrar de obras)**/
+CREATE or REPLACE TRIGGER NOBORRARPELI
+BEFORE DELETE ON PELICULAS
+BEGIN
+  RAISE_APPLICATION_ERROR(-20000, 'No se pueden borrar peliculas');
+END NOBORRARPELI;
+/
+
+/***No dejar borrar series (Habría que borrar de obras)**/
+CREATE or REPLACE TRIGGER NOBORRARSER
+BEFORE DELETE ON SERIE
+BEGIN
+  RAISE_APPLICATION_ERROR(-20001, 'No se pueden borrar series');
+END NOBORRARSER;
+/
+
+/***No dejar borrar episodios (Habría que borrar de obras)**/
+CREATE or REPLACE TRIGGER NOBORRAREPI
+BEFORE DELETE ON EPISODIOS
+BEGIN
+  RAISE_APPLICATION_ERROR(-20002, 'No se pueden borrar episodios');
+END NOBORRAREPI;
+/
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
 /**No puede haber un episodio anterior a la serie**/
 CREATE or REPLACE TRIGGER epAdelantado
 BEFORE INSERT ON EPISODIOS
@@ -19,33 +45,7 @@ numT NUMBER(10);
 END capAdelantado;
 /
 
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
 
-
-/***No dejar borrar peliculas (Habría que borrar de obras)**/
-CREATE or REPLACE TRIGGER NOBORRARPELI
-BEFORE DELETE ON PELICULAS
-BEGIN
-  RAISE_APPLICATION_ERROR(-20000, 'No se pueden borrar peliculas');
-END NOBORRARPELI;
-/
-
-/***No dejar borrar series (Habría que borrar de obras)**/
-CREATE or REPLACE TRIGGER NOBORRARSER
-BEFORE DELETE ON SERIE
-BEGIN
-  RAISE_APPLICATION_ERROR(-20000, 'No se pueden borrar series');
-END NOBORRARSER;
-/
-
-/***No dejar borrar episodios (Habría que borrar de obras)**/
-CREATE or REPLACE TRIGGER NOBORRAREPI
-BEFORE DELETE ON EPISODIOS
-BEGIN
-  RAISE_APPLICATION_ERROR(-20000, 'No se pueden borrar episodios');
-END NOBORRAREPI;
-/
 
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ num NUMBER(10);
           or  :new.tipo =   'features';
   if num<0
   then 
-       RAISE_APPLICATION_ERROR(-20000, 'No puede haber una pelicula basada en una que es previo a la pelicula');
+       RAISE_APPLICATION_ERROR(-20004, 'No puede haber una pelicula basada en una que es previo a la pelicula');
   end if;
 END conexPrevia;
 /
